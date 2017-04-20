@@ -1,4 +1,4 @@
-pydplace==0.1
+pydplace==0.4
 Django==1.11
 django-appconf==1.0.2
 django-bootstrap3==8.2.2
