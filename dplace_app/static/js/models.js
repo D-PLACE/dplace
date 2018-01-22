@@ -47,6 +47,11 @@ function SearchModel(VariableCategory, GeographicRegion, LanguageFamily, Dataset
     this.getSocieties = function() {
         return this.results.societies;
     };
+    
+    this.checkSelected = function() {
+        return this.params.geographicRegions.checkSelected() || this.params.environmentalData.checkSelected()
+            || this.params.languageClassifications.checkSelected() || this.params.culturalTraits.checkSelected();
+    };
 
     this.reset();
 }
@@ -60,16 +65,23 @@ function CulturalTraitModel(VariableCategory, DatasetSources) {
     this.selectedCategory = null;
     this.selectedVariable = null;
     this.badgeValue = 0;
+    this.checkSelected = function() {
+        for (var i = 0; i < this.selectedVariables.length; i++) {
+            if (this.selectedVariables[i].data_type.toLowerCase() == 'continuous') return true;
+            if (this.selectedVariables[i].codes.filter(function(c) { return c.isSelected; }).length > 0) return true;
+        }
+        return false;
+    };
 }
 
 function GeographicRegionModel(GeographicRegion) {
     this.selectedRegions = [];
     this.allRegions = GeographicRegion.query();
     this.badgeValue = 0;
+    this.checkSelected = function() { return this.selectedRegions.length > 0; };
 }
 
 function EnvironmentalDataModel(VariableCategory) {
-    this.variables = [];
     this.categories = VariableCategory.query({type: 'environmental'});
     this.filters = [
         { operator: 'inrange', name: 'between' },
@@ -80,13 +92,24 @@ function EnvironmentalDataModel(VariableCategory) {
     ];
     this.selectedVariables = [];
     this.badgeValue = 0;
+    this.checkSelected = function() {
+        for (var i = 0; i < this.selectedVariables.length; i++) {
+            if (this.selectedVariables[i].selectedVariable) return true;
+        }
+        return false;
+    };
 }
 
 function LanguageClassificationModel(LanguageFamily, Language) {
-    
     /* List of all Language Classes - needed for language search */
     this.allClasses = LanguageFamily.query();
     this.allLanguages = Language.query();
     this.selected = {};
     this.badgeValue = 0;
+    this.checkSelected = function () {
+        for (var key in this.selected) {
+            if (this.selected[key].length > 0) return true;
+        }
+        return false;
+    };
 }

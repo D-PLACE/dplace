@@ -2,8 +2,8 @@ pydplace==0.4
 Django==1.11.7
 django-appconf==1.0.2
 django-bootstrap3==9.1.0
-django-filter==1.0.4
 djangorestframework==3.7.7
+django-filter==1.1.0
 ete3==3.1.1
 psycopg2==2.7.3.2
 python-nexus==1.53
@@ -11,5 +11,5 @@ six==1.11.0
 coverage==4.4.2
 flake8==3.5.0
 newick==0.8.0
-clldutils==1.13.10
-attrs==17.2.0
+clldutils==2.0.1
+attrs==17.4.0

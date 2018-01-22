@@ -112,7 +112,6 @@ function SearchModelService(VariableCategory, GeographicRegion, LanguageFamily, 
             } else {
                 container.society.style = {'background-color': results.geographic_regions.codes[container.society.region.tdwg_code]};
             }
- 
         });
     }
     

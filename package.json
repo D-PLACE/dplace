@@ -4,9 +4,10 @@
   "scripts": {
     "test": "karma start karma.conf.js",
     "report-coverage": "codecov"
-  },
+
+    },
   "devDependencies": {
-    "codecov": "^2.1.0",
+    "codecov": "^2.3.0",
     "istanbul": "^0.4.5",
     "jasmine-core": "^2.5.2",
     "jasmine-node": "^1.14.5",
@@ -14,6 +15,7 @@
     "karma-coverage": "^1.1.1",
     "karma-jasmine": "^1.1.0",
     "karma-phantomjs-launcher": "^1.0.4",
-    "phantomjs-prebuilt": "^2.1.14"
+    "phantomjs-prebuilt": "^2.1.14",
+    "karma-json-fixtures-preprocessor": "0.0.4"
   }
 }

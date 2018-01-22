@@ -1,0 +1,39 @@
+{
+	"variables": {
+		"continuousEnvVar": {
+			"min": -17,
+			"max": 29,
+			"variable": {
+				"id": 317,
+				"name": "Temperature",
+				"data_type": "Continuous",
+				"type": "environmental"
+			},
+			"codes": []
+		},
+		
+		"categoricalEnvVar": {
+			"variable": {
+				"id": 318,
+				"data_type": "Categorical", 
+				"type": "environmental",
+				"name": "Biome",
+			},
+			"codes": [
+				{"code": "NA", "description": "Missing data", "id": 1},
+				{"code": "1", "description": "Biome 1", "id": 2},
+				{"code": "2", "description": "Biome 2", "id": 3,"type": "e", "variable": 318},
+				{"code": "3", "description": "Biome 3","id":4},
+				{"code": "4", "description": "Biome 4", "id":5},
+			]
+		}
+	},
+	
+	"coded_values":  {
+		"continuousEnvVar": {
+        'coded_value_float': 18.25,
+        'variable': 317,
+		}
+	}
+	
+}

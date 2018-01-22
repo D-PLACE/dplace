@@ -12,6 +12,7 @@ angular.module('dplaceFilters', [])
         return function(object) {
             for (var i = 0; i < object.length; i++) { 
                 if (object[i].selectedVariable) return true;
+                else if (object[i].isSelected) return true;
             }
             for (var key in object) {
                 if (object[key].length > 0) return true;

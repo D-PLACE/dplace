@@ -17,7 +17,7 @@ function AppCtrl($scope, $location, $http, searchModelService) {
         }
     };
     
-        $scope.appendQueryString = function() {
+    $scope.appendQueryString = function() {
         var queryObject = $scope.model.getQuery();
         var key, val;
         for (key in queryObject) {
@@ -27,14 +27,12 @@ function AppCtrl($scope, $location, $http, searchModelService) {
             }
             $location.search(key, val);
         }
-        
     }
     
 
     $scope.switchToResults = function() {
         $location.path('/societies');
         $scope.appendQueryString();
-        
     };
     
 

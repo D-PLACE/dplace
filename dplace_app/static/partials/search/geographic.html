@@ -47,7 +47,7 @@
                     ng-click="resetSearch()">Reset
             </button>
             <button 
-                ng-show="checkIfSelected()" 
+                ng-show="searchModel.checkSelected()" 
                 class="btn search-btn" 
                 ng-disabled="searchButton.disabled"
                 ng-click="showCriteria()">

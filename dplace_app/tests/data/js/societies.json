@@ -1,0 +1,20 @@
+{
+	"society1": {
+        "society": { "id": 11264}, 
+        "environmental_values": [],
+        "geographic_regions": [],
+        "variable_coded_values": []
+    },
+    "society2":  {
+        "society": { "id": 16,  }, 
+        "environmental_values": [],
+        "geographic_regions": [],
+        "variable_coded_values": []
+    },
+    "society3":  {
+        "society": { "id": 46 }, 
+        "environmental_values": [],
+        "geographic_regions": [],
+        "variable_coded_values": []
+    }
+}

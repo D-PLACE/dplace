@@ -17,6 +17,8 @@ module.exports = function(config) {
         'static/bower_components/angular-resource/angular-resource.min.js',
         'static/bower_components/angular-route/angular-route.min.js',
         'static/bower_components/angular-mocks/angular-mocks.js',
+        'static/bower_components/d3/d3.js',
+        'static/bower_components/jquery/dist/jquery.js',
         'static/js/app.js',
         'static/js/controllers/app.js',
         'static/js/controllers/*.js',
@@ -28,7 +30,9 @@ module.exports = function(config) {
         'static/js/directives.js',
         'static/bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.min.js',
         'static/js/controllers/search/*.js',
+        'tests/data/js/*.json',
         'tests/*.js'
+		
     ],
 
     // list of files to exclude
@@ -36,8 +40,11 @@ module.exports = function(config) {
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-     preprocessors: { '*.js': ['coverage'] },
-
+     preprocessors: { 'static/js/*.js': ['coverage'], 'static/js/controllers/*.js': ['coverage'], 'static/js/controllers/search/*.js': ['coverage'], 'tests/data/js/*.json': ['json_fixtures'] },
+	jsonFixturesPreprocessor: {
+		stripPrefix: 'tests/data/js/',
+		camelizeFilenames: true
+	},
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter

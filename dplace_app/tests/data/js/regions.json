@@ -1,0 +1,29 @@
+{
+	"Africa": {
+        "continent": "AFRICA",
+        "count": 71,
+        "id": 7398,
+        "level_2_re": 24,
+        "region_nam": "Northeastern Africa",
+        "tdwg_code": 24
+    },
+    "easternEurope": {
+        "code": "14",
+        "id": 5,
+        "name": "Eastern Europe",
+        "region_nam": "Eastern Europe",
+        "tdwg_code": 25
+    },
+    "Asia": {
+        "code": "20",
+        "id": 4,
+        "name": "Asia",
+        "region_nam": "Southeast Asia",
+        "tdwg_code": 6
+    },
+   "westernEurope": {
+        "code": "45",
+        "id": 60,
+        "name": "Western Europe",
+    }
+}

@@ -1,0 +1,53 @@
+{
+	"language1": {
+		"family": {
+			"id": 11,
+			"language_count": 11,
+			"name": "Family 1",
+			"scheme": "G"
+		},
+		"glotto_code": "abcd1234",
+		"id": 1100,
+		"iso_code": "abc",
+		"name": "ABCD",
+		"societies": [1,2]
+	},
+	
+	"language2": {
+		"family": {
+			"id": 58,
+			"name": "Austronesian",
+			"scheme": "G"
+		},
+		"glotto_code": "efgh1234",
+		"id": 1110,
+		"iso_code": "efg",
+		"name": "SFGH",
+		"societies": [1]
+	},
+	
+	"language3": {
+		"family": {
+			"id": 58,
+			"name": "Austronesian",
+			"scheme": "G"
+		},
+		"glotto_code": "lmno1234",
+		"id": 1111,
+		"iso_code": "lmn",
+		"name": "LMNO",
+		"societies": [1,2]
+	},
+	
+	"Family1": {
+        "id": 11,
+        "name": "Family 1",
+        "scheme": "G"
+    },
+    
+    "Austronesian": {
+        "id": 58,
+        "name": "Austronesian",
+        "scheme": "G"
+    }
+}

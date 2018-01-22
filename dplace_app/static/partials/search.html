@@ -15,7 +15,6 @@
                 <button ng-repeat="button in buttons"
                         type="button" class="btn radioBack {{button.radioClass}}"
                         ng-model="model.searchParams.selectedButton"
-                        ng-click="buttonChanged(button)"
                         btn-radio="button"
                         >
                         <span class="radioLabel">{{ button.name }}</span>
@@ -59,10 +58,10 @@
                         </ul>
                     <h5 data-toggle="collapse" data-target="#scCulture" ng-show="searchModel.params.culturalTraits.selectedVariables.length > 0" style="cursor:pointer;"><strong>Culture</strong></h5>
                        <ul id="scCulture" class="list-unstyled collapse in" style="padding-left:10px;">
-                        <li ng-repeat="variable in searchModel.params.culturalTraits.selectedVariables" ng-show="variable.data_type == 'Continuous' || variable.selected.length > 0">
+                        <li ng-repeat="variable in searchModel.params.culturalTraits.selectedVariables" ng-show="(variable.data_type == 'Continuous') || (variable.codes | isEmpty)">
                             <a ng-click="removeFromSearch(variable, 'variable')" style="color:red;"><span title="Remove criterion" class="glyphicon glyphicon-remove"></span></a>&nbsp;{{ variable.name }}
                             <ul class="criteria-list">
-                                <li ng-repeat="code in variable.selected">
+                                <li ng-repeat="code in variable.codes" ng-show="code.isSelected">
                                     <a ng-click="code.type ='c'; removeFromSearch(code, 'code')" style="color:red;"><span title="Remove criterion" class="glyphicon glyphicon-remove"></span></a>&nbsp;{{ code.short_description }}
                                 </li>
                             </ul>
@@ -73,7 +72,7 @@
                             <li ng-repeat="variable in searchModel.params.environmentalData.selectedVariables" ng-show="variable.selectedVariable">
                                 <a ng-click="removeFromSearch(variable, 'environmental')" style="color:red;"><span title="Remove criterion" class="glyphicon glyphicon-remove"></span></a>&nbsp;{{variable.selectedVariable.name}}
                                 <ul class="criteria-list">
-                                    <li ng-repeat="code in variable.selectedVariable.selected">
+                                    <li ng-repeat="code in variable.selectedVariable.codes" ng-show="code.isSelected">
                                         <a ng-click="code.type ='e'; removeFromSearch(code, 'code')" style="color:red;"><span title="Remove criterion" class="glyphicon glyphicon-remove"></span></a>&nbsp;{{ code.short_description }}
                                     </li>
                                 </ul>

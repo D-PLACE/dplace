@@ -1,5 +1,5 @@
 describe('Testing geographic search', function() {
-    var appScope, mockAppCtrl, searchScope, geographicScope, mockSearchCtrl, mockGeographicCtrl, mockSearchModelService, mockColorMapService, mockFindSocieties;
+    var regions, appScope, mockAppCtrl, searchScope, geographicScope, mockSearchCtrl, mockGeographicCtrl, mockSearchModelService, mockColorMapService, mockFindSocieties;
     beforeEach(function() {
         module('dplaceServices');
         module('dplace');
@@ -11,7 +11,8 @@ describe('Testing geographic search', function() {
         mockSearchModelService = searchModelService;
         mockAppCtrl = $controller('AppCtrl', {$scope: appScope, searchModelService: mockSearchModelService});
         spyOn(appScope, 'setActive');
-
+		
+		regions = window.__fixtures__['regions'];
         mockColorMapService = colorMapService;
         mockFindSocieties = FindSocieties;
         searchScope = appScope.$new();
@@ -51,40 +52,19 @@ describe('Testing geographic search', function() {
     
     it('should update badgeValue and call search', function() { 
         //test add region 
-        geographicScope.geographic.selectedRegions.push(
-            {
-                "code": "14",
-                "id": 5,
-                "name": "Eastern Europe"
-            }
-        );
+        geographicScope.geographic.selectedRegions.push(regions.easternEurope);
         geographicScope.$digest();
         expect(geographicScope.geographic.badgeValue).toEqual(1);
-        geographicScope.geographic.selectedRegions.push(
-            {
-                "code": "20",
-                "id": 4,
-                "name": "Asia"
-            }
-        );
+        geographicScope.geographic.selectedRegions.push(regions.Asia);
         geographicScope.$digest();
         expect(geographicScope.geographic.badgeValue).toEqual(2);
-        
-        //test remove region
-        searchScope.removeFromSearch({
-                "code": "20",
-                "id": 4,
-                "name": "Asia"
-            }, 'geographic');
-        geographicScope.$digest();
-        expect(geographicScope.geographic.badgeValue).toEqual(1);
         
         geographicScope.doSearch();
         expect(searchScope.search).toHaveBeenCalled();
         searchScope.$digest();
                 
         expected_searchQuery = {
-            'p': [geographicScope.geographic.selectedRegions[0].id]
+            'p': [5, 4]
         };
         expect(mockSearchModelService.updateSearchQuery).toHaveBeenCalled();
         expect(mockSearchModelService.updateSearchQuery).toHaveBeenCalledWith(expected_searchQuery);

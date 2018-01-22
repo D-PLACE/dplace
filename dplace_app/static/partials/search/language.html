@@ -13,7 +13,7 @@
                 ng-disabled="searchButton.disabled"
                 ng-click="resetSearch()">Reset
             </button>
-            <button ng-show="checkIfSelected()" 
+            <button ng-show="searchModel.checkSelected()" 
                 class="btn search-btn" 
                 ng-disabled="searchButton.disabled"
                 ng-click="showCriteria()">
@@ -51,7 +51,7 @@
 				<span class="variable-label"  ng-show="scheme.languages.length > 1">Select All<input type="checkbox" class="pull-left" ng-model="scheme.languages.allSelected" ng-change="selectAllChanged(scheme)" />
 					</span>
                 <div ng-repeat="language in scheme.languages|orderBy:'name'">
-                    <input class="pull-left" type="checkbox" ng-model="language.isSelected" ng-change="classificationSelectionChanged()">
+                    <input class="pull-left" type="checkbox" ng-model="language.isSelected" ng-change="classificationSelectionChanged(language, scheme)">
                     <span class="language-label">{{ language.name }} ({{language.societies.length}} societ{{(language.societies.length==1)?'y':'ies'}})</span>
                 </div>
             </div>

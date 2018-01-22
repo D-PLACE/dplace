@@ -13,7 +13,7 @@
                 ng-disabled="searchButton.disabled"
                 ng-click="resetSearch()">Reset
             </button>
-        <button ng-show="checkIfSelected()"
+        <button ng-show="searchModel.checkSelected()"
             ng-disabled="searchButton.disabled"        
             class="btn search-btn" 
             ng-click="showCriteria()">

@@ -1,0 +1,93 @@
+{
+	"variables": {
+		"categoricalCulturalVar": {
+			"codes": [
+				{"code": "NA", "description": "Missing data", "id": 40},
+				{"code": "1", "description": "Absence of slavery", "id": 41},
+				{"code": "2", "description": "Incipient or nonhereditary slavery, i.e., where slave status is temporary and not transmitted to the children of slaves", "id": 42},
+				{"code": "3", "description": "Slavery reported but not identified as hereditary or nonhereditary", "id": 43},
+				{"code": "4", "description": "Hereditary slavery present and of at least modest social significance", "id": 44},
+			],
+			"variable": {
+				"id": 1628,
+				"data_type": "Categorical",
+				"type": "cultural",
+				"name": "Slavery"
+			}
+		},
+		"categoricalCulturalVar2": {
+			"codes": [
+				{"code": "NA", "description": "Missing data"},
+				{"code": "21", "description": "Absence of slavery"},
+				{"code": "22", "description": "Incipient or nonhereditary slavery, i.e., where slave status is temporary and not transmitted to the children of slaves"},
+				{"code": "23", "description": "Slavery reported but not identified as hereditary or nonhereditary"},
+				{"code": "24", "description": "Hereditary slavery present and of at least modest social significance"},
+			],
+			"variable": {
+				"id": 1628,
+				"data_type": "Categorical",
+				"type": "cultural",
+				"name": "Slavery"
+			}
+		},
+		
+		"continuousCulturalVar": {
+			"min": 0,
+			"max": 1000,
+			"variable": {
+				"id": 66,
+				"name": "Population",
+				"data_type": "Continuous",
+				"type": "cultural"
+			},
+			"codes": []
+		},
+		
+		"ordinalCulturalVar": {
+			"codes": [
+				{"code": "NA", "description": "0-25%"},
+				{"code": "1", "description": "26-50%"},
+				{"code": "2", "description": "51-75%"},
+				{"code": "3", "description": "76-100%"}
+			],
+			"variable": {
+				"id": 1934,
+				"data_type": "Ordinal",
+				"type": "cultural"
+			}
+		}
+    },
+	
+	"coded_values": {
+		"categoricalCulturalVar": {
+			"coded_value": "1",
+			"variable": 1628,
+			"code_description": {"code": "1", "description": "Absence of slavery"}
+		},
+		
+		"categoricalCulturalVarNA": { 
+			"coded_value": "NA",
+			"variable": 1628,
+			"code_description": {"code": "NA", "description": "Missing data"}
+		},
+		
+		"ordinalCulturalVar": {
+			"coded_value": "1",
+			"variable": 1934,
+			"code_description": {"code": "1", "description": "26-50%"}
+		},
+		
+		"continuousCulturalVar1": {
+			"coded_value_float": 250,
+			"coded_value": 250,
+			"variable": 66
+		},
+		
+		"continuousCulturalVar2": {
+			"coded_value_float": 0,
+			"coded_value": 0,
+			"variable": 66
+		}
+
+	}
+}

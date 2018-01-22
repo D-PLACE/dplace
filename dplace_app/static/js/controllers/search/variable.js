@@ -1,4 +1,4 @@
-function VariableSearchCtrl($scope, searchModelService, getCategories, DatasetSources, Variable, MinAndMax, CodeDescription) {
+function VariableSearchCtrl($scope, searchModelService, getCategories, Variable, MinAndMax, CodeDescription) {
     var linkModel = function() {
         $scope.filters = searchModelService.getModel().getEnvironmentalData().filters;
         if ($scope.model.searchParams.selectedButton.value == 'cultural') {
@@ -7,22 +7,13 @@ function VariableSearchCtrl($scope, searchModelService, getCategories, DatasetSo
         } else {
             $scope.variables = searchModelService.getModel().getEnvironmentalData().selectedVariables;
             if ($scope.variables.length == 0) {
-                $scope.variables.push({'vals': ['', ''], 'selectedFilter': $scope.filters[0], 'variables': [], 'categories': []});
+                $scope.variables.push({'vals': ['', ''], 'selectedFilter': $scope.filters[0], 'categories': []});
                 $scope.variables[0].categories = searchModelService.getModel().getEnvironmentalData().categories;
             }
         }
     };
     $scope.$on('searchModelReset', linkModel);
     linkModel();
-    
-    $scope.addVariable = function() {
-        $scope.variables.push(
-            {'vals': ['', ''], 
-            'selectedFilter': $scope.filters[0],
-            'variables': [],
-            'categories': searchModelService.getModel().getEnvironmentalData().categories
-        });
-    };
     
     $scope.sourceChanged = function(variable) {
         variable.categories = [];
@@ -51,49 +42,38 @@ function VariableSearchCtrl($scope, searchModelService, getCategories, DatasetSo
                     searchModelService.getModel().getEnvironmentalData().badgeValue = $scope.variables.map(function(v) { return v.selectedVariable; }).length;
                 }
                 $scope.filterChanged(variable);
-            } else {
-                variable.selectedVariable.codes = [];
-                variable.selectedVariable.codes = CodeDescription.query({variable: variable.selectedVariable.id});
-                
+            } else {                
                 selectedVariables = ($scope.model.searchParams.selectedButton.value == 'cultural') ? variable.selectedVariables : $scope.variables;
-                 
-                if (selectedVariables.indexOf(variable.selectedVariable) != -1) {
-                    variable.selectedVariable.codes.$promise.then(function(result) {
-                        result.forEach(function(c) { 
-                            if (variable.selectedVariable.selected.map(function(m) { return m.id; }).indexOf(c.id) != -1) c.isSelected = true;
-                        });
-                    });
-                
-                } else {
-                    variable.selectedVariable.selected = [];
-                    if ($scope.model.searchParams.selectedButton.value == 'cultural') {
-                        variable.selectedVariables.push(variable.selectedVariable);
-                    }                    
-                    variable.selectedVariable.codes.$promise.then(function(result) {
+                if (selectedVariables.indexOf(variable.selectedVariable) == -1) {
+                    variable.selectedVariable.codes = [];
+                    getCodes = CodeDescription.query({variable: variable.selectedVariable.id});
+                    variable.selectedVariable.selected = []; 
+                    getCodes.$promise.then(function(result) {
                         result.forEach(function(c) {
                             c.isSelected = true;
-                            codeSelected(variable.selectedVariable, c);
-                        });
+                            $scope.codeSelected(variable.selectedVariable, c);
+                            variable.selectedVariable.codes.push(c);
+                        })
                     });
-                
+                    variable.allSelected = true;
+                    if ($scope.model.searchParams.selectedButton.value == 'cultural') {
+                        variable.selectedVariables.push(variable.selectedVariable);
+                    } 
                 }
             }
         }
         if ($scope.model.searchParams.selectedButton.value == 'cultural') $scope.numVars();
     };
-    
-    function codeSelected(variable, code) {
+
+    $scope.codeSelected = function (variable, code) { 
         if (code.isSelected) {
-            if (variable.selected.map(function(v) { return v.id; }).indexOf(code.id) == -1) {
-                variable.selected.push(code);
-                if (variable.type == 'cultural') $scope.searchModel.getCulturalTraits().badgeValue++;
-                else if (variable.type == 'environmental') $scope.searchModel.getEnvironmentalData().badgeValue = $scope.variables.map(function(v) { return v.selectedVariable; }).length;
-            }
+            if (variable.type == 'cultural') $scope.searchModel.getCulturalTraits().badgeValue++;
+            else if (variable.type == 'environmental') $scope.searchModel.getEnvironmentalData().badgeValue = $scope.variables.map(function(v) { return v.selectedVariable; }).length;
         } else {
             code.type = variable.type == 'cultural' ? 'c' : 'e'
             $scope.removeFromSearch(code, 'code');        
         }
-        if (variable.selected.length == variable.codes.length) variable.allSelected = true;
+        if (variable.codes.filter(function (c) { return c.isSelected; }).length == variable.codes.length) variable.allSelected = true;
         else variable.allSelected = false;
         
         if ($scope.model.searchParams.selectedButton.value == 'cultural') $scope.numVars();
@@ -117,24 +97,21 @@ function VariableSearchCtrl($scope, searchModelService, getCategories, DatasetSo
         }
     };
     
-    $scope.codeSelected = function(variable, code) {
-        codeSelected(variable, code);
-    };
-    
     $scope.selectAll = function(variable) {
         if (variable.allSelected) {
             variable.codes.forEach(function(c) {
-                c.isSelected = true;
-                codeSelected(variable, c);
+                if (!c.isSelected) {
+                    c.isSelected = true;
+                    $scope.codeSelected(variable, c);
+                }
             });
         } else {
             variable.codes.forEach(function(c) {
-                c.isSelected = false;
-                codeSelected(variable, c);
+                if (c.isSelected) {
+                    c.isSelected = false;
+                    $scope.codeSelected(variable, c);
+                }
             });
         }
     };
-
-
-
 }

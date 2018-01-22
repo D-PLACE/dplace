@@ -6,7 +6,7 @@ function CulturalCtrl($scope, searchModelService) {
         $scope.numSelectedVars = 0;
         $scope.traits.forEach(function(trait) {
             trait.selectedVariables.forEach(function(v) {
-                if (v.data_type.toLowerCase() == 'continuous' || (v.selected && v.selected.length > 0)) $scope.numSelectedVars += 1;
+                if (v.data_type.toLowerCase() == 'continuous' || (v.codes && v.codes.filter(function(c) { return c.isSelected; }).length > 0)) $scope.numSelectedVars += 1;
             });
         });    
     };

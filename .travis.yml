@@ -16,5 +16,5 @@ script:
   - "coverage run --source='dplace_app' manage.py test"
   - npm test
 after_success:
+  - codecov --disable=gcov
   - coverage report -m
-  - codecov
