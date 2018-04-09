@@ -10,6 +10,6 @@ python-nexus==1.61
 six==1.11.0
 coverage==4.4.2
 flake8==3.5.0
-newick==0.8.0
+newick==0.9.2
 clldutils==2.0.1
 attrs==17.4.0
