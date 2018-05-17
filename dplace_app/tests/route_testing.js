@@ -21,6 +21,8 @@ describe('Testing routeProvider', function() {
             .respond(200);
             $httpBackend.whenGET('/static/partials/info/legal.html')
             .respond(200);
+            $httpBackend.whenGET('/static/partials/info/privacy.html')
+            .respond(200);
             $httpBackend.whenGET('/static/partials/info/source.html')
             .respond(200);
             $httpBackend.whenGET('/static/partials/info/technology.html')

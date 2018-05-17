@@ -47,6 +47,7 @@ urlpatterns = [
     url(r'^source/?$', views.angular, name='source'),
     url(r'^technology/?$', views.angular, name='technology'),
     url(r'^legal/?$', views.angular, name='legal'),
+    url(r'^privacy/?$', views.angular, name='privacy'),
     url(r'^team/?$', views.angular, name='team'),
     url(r'^publication/?$', views.angular, name='publication'),
 

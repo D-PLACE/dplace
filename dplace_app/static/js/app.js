@@ -40,6 +40,10 @@ function dplaceRouter($routeProvider, $locationProvider) {
             templateUrl:'/static/partials/info/legal.html',
             controller:'AboutCtrl'
         })
+        .when('/privacy', {
+            templateUrl:'/static/partials/info/privacy.html',
+            controller:'AboutCtrl'
+        })
         .when('/source', {
             templateUrl:'/static/partials/info/source.html',
             controller:'AboutCtrl'
