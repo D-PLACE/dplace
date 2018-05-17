@@ -41,10 +41,8 @@ describe('Testing language controller', function() {
         });
         
         //SPIES
-        spyOn(mockSearchModelService, 'updateSearchQuery');
-        spyOn(searchScope, 'searchSocieties');
         spyOn(searchScope, 'removeFromSearch').and.callThrough();
-        spyOn(searchScope, 'search').and.callThrough();
+        spyOn(searchScope, 'resetSearch').and.callThrough();
         spyOn(langScope, 'classificationSelectionChanged').and.callThrough();
         spyOn(langScope, 'selectAllChanged').and.callThrough();
                             
@@ -65,10 +63,16 @@ describe('Testing language controller', function() {
             .respond(200);
         $httpBackend.whenGET('/api/v1/languages?page_size=1000')
             .respond(200);
-        $httpBackend.whenPOST('/api/v1/find_societies')
-            .respond(200);
-
     }));
+    
+    it('should check that everything is defined', function() {
+        expect(langScope.languageClassifications).toBeDefined();
+        expect(langScope.families).toBeDefined();
+        expect(langScope.selectionChanged).toBeDefined();
+        expect(langScope.selectAllChanged).toBeDefined();
+        expect(langScope.addToSelection).toBeDefined();
+        expect(langScope.classificationSelectionChanged).toBeDefined();
+    });
     
     it('should update selection when the user chooses a language family', function() {
 		langScope.languageClassifications.allLanguages = [language1, language2, language3];
@@ -241,6 +245,21 @@ describe('Testing language controller', function() {
        langScope.selectAllChanged(langScope.families[0]);
        langScope.$digest();
        expect(langScope.languageClassifications.selected['Austronesian'].length).toBe(0);
+    });
+    
+    it('should run linkModel after reset', function() {
+        //set arbitrary values
+        mockSearchModelService.getModel().getLanguageClassifications().selected = {
+            "Family 1": [1, 2, 3, 4, 5],
+            "Family 2": [6, 7, 8, 9, 10]
+        };
+        mockSearchModelService.getModel().getLanguageClassifications().badgeValue = 10;
+        searchScope.resetSearch();
+        searchScope.$digest();
+        
+        expect(mockSearchModelService.getModel().getLanguageClassifications().selected).toEqual({});
+        expect(mockSearchModelService.getModel().getLanguageClassifications().badgeValue).toEqual(0);
+        expect(langScope.languageClassifications).toEqual(mockSearchModelService.getModel().getLanguageClassifications());
     });
     
     /*it('should do search', function() {

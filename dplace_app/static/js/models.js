@@ -57,9 +57,8 @@ function SearchModel(VariableCategory, GeographicRegion, LanguageFamily, Dataset
 }
 
 // Cultural trait search
-// Depends on VariableCategory for initial load. Somewhat messy, requires entire model to know about that API
 function CulturalTraitModel(VariableCategory, DatasetSources) {
-    this.categories = VariableCategory.query(); // these objects get annotated with variables
+    this.categories = [] //VariableCategory.query(); // these objects get annotated with variables
     this.sources = DatasetSources.query();
     this.selectedVariables = [];
     this.selectedCategory = null;

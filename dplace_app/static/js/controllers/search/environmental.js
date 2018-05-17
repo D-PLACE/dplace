@@ -7,11 +7,7 @@ function EnvironmentalCtrl($scope, searchModelService) {
             'categories': searchModelService.getModel().getEnvironmentalData().categories
         });
     };
-        
-    $scope.doSearch = function() {
-        $scope.search();
-    };
-    
+
     /* reset functions */
     var linkModel = function() {
         $scope.addVariable();

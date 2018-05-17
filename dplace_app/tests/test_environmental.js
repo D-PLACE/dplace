@@ -20,9 +20,7 @@ describe('Testing environmental controller', function() {
             searchModelService: mockSearchModelService,
             FindSocieties: mockFindSocieties
         });
-        spyOn(searchScope, 'search').and.callThrough();
-		spyOn(mockSearchModelService, 'updateSearchQuery');
-        spyOn(searchScope, 'searchSocieties');
+
         spyOn(searchScope, 'resetSearch').and.callThrough();
         
         environmentalScope = searchScope.$new();
@@ -48,10 +46,11 @@ describe('Testing environmental controller', function() {
             .respond(200);
         $httpBackend.whenGET('/api/v1/languages?page_size=1000')
             .respond(200);
-        $httpBackend.whenPOST('/api/v1/find_societies')
-            .respond(200);
-
     }));
+    
+    it('should check that everything is defined', function() {
+        expect(environmentalScope.addVariable).toBeDefined();       
+    });
     
     it('should add variable', function() {
         expected = {'vals': ['', ''], 
@@ -93,15 +92,12 @@ describe('Testing environmental controller', function() {
     it('should run linkModel after reset', function() {
         //set arbitrary values
         mockSearchModelService.getModel().getEnvironmentalData().selectedVariables = [5, 6, 7, 8];
-        
-        expected = {'vals': ['', ''], 
-            'selectedFilter': mockSearchModelService.getModel().getEnvironmentalData().filters,
-            'categories': mockSearchModelService.getModel().getEnvironmentalData().categories
-        };
+        mockSearchModelService.getModel().getEnvironmentalData().badgeValue = 4;
         searchScope.resetSearch();
         searchScope.$digest();
         
         expect(mockSearchModelService.getModel().getEnvironmentalData().selectedVariables.length).toEqual(1);
+        expect(mockSearchModelService.getModel().getEnvironmentalData().badgeValue).toEqual(0);
         expect(mockSearchModelService.getModel().getEnvironmentalData().selectedVariables[0].vals).toEqual(['','']);
         expect(mockSearchModelService.getModel().getEnvironmentalData().selectedVariables[0].selectedFilter).toEqual({ operator: 'inrange', name: 'between' });
         expect(mockSearchModelService.getModel().getEnvironmentalData().selectedVariables[0].categories).toEqual(mockSearchModelService.getModel().getEnvironmentalData().categories);

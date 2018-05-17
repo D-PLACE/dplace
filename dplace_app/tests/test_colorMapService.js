@@ -58,6 +58,14 @@ describe('Color Map Service Testing', function() {
 		delete society3.society.language;
 	});
     
+    it('should check that everything is defined', function() {
+        expect(mockColorService.tempColor).toBeDefined();
+        expect(mockColorService.mapColor).toBeDefined();
+        expect(mockColorService.mapColorMonochrome).toBeDefined();
+        expect(mockColorService.generateRandomHue).toBeDefined();
+        expect(mockColorService.generateColorMap).toBeDefined();
+    });
+    
     it('geographic region color map', function() {
         var geographic_region = regions.Africa;
         society.society.region = geographic_region;

@@ -55,7 +55,7 @@
                                 <button class="btn btn-default dropdown-toggle form-control">{{ variable.selectedVariable.selectedFilter.name }} <span class="caret"></span></button>
                                 <ul class="dropdown-menu">
                                     <li ng-repeat="filter in filters">
-                                        <a ng-click="variable.selectedVariable.selectedFilter = filter; filterChanged(variable);">{{ filter.name }}</a>
+                                        <a ng-click="variable.selectedVariable.selectedFilter = filter; filterChanged(variable.selectedVariable);">{{ filter.name }}</a>
                                     </li>
                                 </ul>
                             </div>
@@ -83,7 +83,7 @@
                             </div>
                             <div class="form-group col-xs-3" ng-class="{'has-error':variable.VariableForm.vals1outrange.$invalid && variable.VariableForm.vals1outrange.$dirty}">
                                 <div class="input-group">
-                                    <input name="vals1outrange" class="form-control" ng-pattern="/^(0|\-?[0-9][0-9]*\.?[0-9]+)$/" ng-model="variable.selectedVariable.vals[1]" />
+                                    <input name="vals1outrange" class="form-control" ng-pattern="/^(0|\-?[0-9][0-9]*\.?[0-9]*)$/" ng-model="variable.selectedVariable.vals[1]" />
                                     <span class="input-group-addon">{{ variable.selectedVariable.units }}</span>
                                 </div>
                             </div>
@@ -99,7 +99,7 @@
                         <div class="fields-inrange" ng-show="variable.selectedVariable.selectedFilter.operator == 'gt'">
                             <div class="form-group col-xs-6" ng-class="{'has-error':variable.VariableForm.valsgt.$invalid && variable.VariableForm.valsgt.$dirty}">
                                 <div class="input-group">
-                                    <input name="valsgt" class="form-control" ng-pattern="/^(0|\-?[0-9][0-9]*\.?[0-9]+)$/" ng-model="variable.selectedVariable.vals[0]" />
+                                    <input name="valsgt" class="form-control" ng-pattern="/^(0|\-?[0-9][0-9]*\.?[0-9]*)$/" ng-model="variable.selectedVariable.vals[0]" />
                                     <span class="input-group-addon">{{ variable.selectedVariable.units }}</span>
                                 </div>
                             </div>

@@ -74,7 +74,7 @@ describe('Search Model Service Testing', function() {
 	
 	//reset all models etc from previous test(s)
 	beforeEach(function() {
-		
+
 		//clear previous stuff
 		society1.environmental_values = [];
 		society1.geographic_regions = [];

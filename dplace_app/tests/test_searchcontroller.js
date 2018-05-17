@@ -101,9 +101,43 @@ describe('Testing search controller', function() {
             .respond(200);
     }));
     
+    it('should check that everything is defined', function() {
+        //objects
+        expect(searchScope.searchModel).toBeDefined();
+        expect(searchScope.searchBySocietyButton).toBeDefined();
+        expect(searchScope.searchCriteria).toBeDefined();
+        expect(searchScope.searchButton).toBeDefined();
+        expect(searchScope.buttons).toBeDefined();
+        
+        //functions
+        expect(searchScope.disableSearchButton).toBeDefined();
+        expect(searchScope.enableSearchButton).toBeDefined();
+        expect(searchScope.showCriteria).toBeDefined();
+        expect(searchScope.removeFromSearch).toBeDefined();
+        expect(searchScope.searchSocieties).toBeDefined();
+        expect(searchScope.searchBySociety).toBeDefined();
+        expect(searchScope.search).toBeDefined();
+        expect(searchScope.resetSearch).toBeDefined();
+       
+    });
     
     it('should check starting values', function() {
-        expect(searchScope.selectedButton).not.toBeDefined();
+        buttons = [
+            {radioClass: 'radioPlaces', value:'geographic', name:'PLACES', fullName: 'Geographic Region'},
+            {radioClass: 'radioLanguage', value:'language', name:'LANGUAGE', fullName: 'Language Family'},
+            {radioClass: 'radioCulture', value:'cultural', name:'CULTURE', fullName: 'Cultural Trait'},
+            {radioClass: 'radioEnv', value:'environmental', name:'ENVIRONMENT', fullName: 'Environmental Data'}
+        ];
+        //check buttons
+        for (var b = 0; b < buttons.length; b++) {
+            expect(searchScope.buttons[b].radioClass).toEqual(buttons[b].radioClass);
+            expect(searchScope.buttons[b].value).toEqual(buttons[b].value);
+            expect(searchScope.buttons[b].name).toEqual(buttons[b].name);
+            expect(searchScope.buttons[b].fullName).toEqual(buttons[b].fullName);
+            expect(searchScope.buttons[b].badgeValue).toBeDefined();
+        }
+        
+        expect(searchScope.selectedButton).not.toBeDefined(); // nothing selected to start
         expect(searchScope.searchButton.disabled).toBeFalsy();
         expect(searchScope.searchButton.text).toBe('Search');
         expect(searchScope.searchBySocietyButton.disabled).toBeFalsy();

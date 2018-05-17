@@ -215,7 +215,7 @@ def result_set_from_query_dict(query_dict):
         for varid, operator, params in criteria:
             if operator != 'categorical':
                 params = map(float, params)
-            if operator == 'inrange':
+            if operator == 'inrange' or operator == 'all':
                 sql_where.append("{0}.coded_value_float >= {1:f} AND {0}.coded_value_float <= {2:f}".format(alias, params[0], params[1]))
             elif operator == 'outrange':
                 sql_where.append("{0}.coded_value_float >= {1:f} OR {0}.coded_value_float <= {2:f}".format(alias, params[1], params[0]))
@@ -404,16 +404,13 @@ def get_categories(request):
     Filters categories for sources, as some categories are empty for some sources
     """
     query_dict = get_query_from_json(request)
-    categories = models.Category.objects.filter(type='cultural')
-    source_categories = []
+    categories = models.Category.objects.all()
     if 'source' in query_dict:
-        source = models.Source.objects.filter(id=query_dict['source'])
-        variables = models.Variable.objects.filter(source=source)
-        for c in categories:
-            if variables.filter(index_categories=c.id):
-                source_categories.append(c)
-        return Response(
-            serializers.CategorySerializer(source_categories, many=True).data)
+        category_ids = models.Variable.objects\
+                .filter(source__id=query_dict['source'])\
+                .prefetch_related('index_categories')\
+                .values_list('index_categories__id', flat=True)
+        categories = categories.filter(type='cultural', id__in=category_ids)
     return Response(serializers.CategorySerializer(categories, many=True).data)
 
 

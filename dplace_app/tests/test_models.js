@@ -68,7 +68,7 @@ describe('Testing models.js', function() {
         expect(mockSearchModel.checkSelected).toBeDefined();
     });
     
-    it('should check that pre-populated fields are populated', function() {
+    it('should check that pre-populated fields are populated + starting values', function() {
         parameters = mockSearchModel.params;
         filters = [
             { operator: 'inrange', name: 'between' },
@@ -78,24 +78,39 @@ describe('Testing models.js', function() {
             { operator: 'all', name: 'all values'},
         ];
         
-        expect(parameters.culturalTraits.categories.length).toEqual(4);
-        expect(parameters.culturalTraits.categories.map(function(m) { return m.id; })).toEqual([1, 2, 3, 4]);
+        expect(parameters.culturalTraits.categories).toEqual([]);
+        //expect(parameters.culturalTraits.categories.length).toEqual(4);
+        //expect(parameters.culturalTraits.categories.map(function(m) { return m.id; })).toEqual([1, 2, 3, 4]);
         
         expect(parameters.culturalTraits.sources.length).toEqual(4);
         expect(parameters.culturalTraits.sources.map(function(m) { return m.id; })).toEqual([100, 101, 102, 103]);
+        expect(parameters.culturalTraits.selectedVariables).toEqual([]);
+        expect(parameters.culturalTraits.selectedCategory).toEqual(null);
+        expect(parameters.culturalTraits.selectedVariable).toEqual(null);
+        expect(parameters.culturalTraits.badgeValue).toEqual(0);
+        expect(parameters.culturalTraits.checkSelected).toBeDefined();
         
         expect(parameters.geographicRegions.allRegions.length).toEqual(2);
         expect(parameters.geographicRegions.allRegions.map(function(m) { return m.name; })).toEqual(['Africa', 'Asia']);
+        expect(parameters.geographicRegions.selectedRegions).toEqual([]);
+        expect(parameters.geographicRegions.badgeValue).toEqual(0);
+        expect(parameters.geographicRegions.checkSelected).toBeDefined();
         
         expect(parameters.environmentalData.categories.length).toEqual(4);
         expect(parameters.environmentalData.categories.map(function(m) { return m.id; })).toEqual([7, 8, 9, 10]);
         expect(parameters.environmentalData.filters).toEqual(filters);
-        
+        expect(parameters.environmentalData.selectedVariables).toEqual([]);
+        expect(parameters.environmentalData.badgeValue).toEqual(0);
+        expect(parameters.environmentalData.checkSelected).toBeDefined();
+
         expect(parameters.languageClassifications.allClasses.length).toEqual(3);
         expect(parameters.languageClassifications.allClasses.map(function(m) { return m.name; })).toEqual(['Select All Languages', 'Austronesian', 'Indo-European']);
-        
         expect(parameters.languageClassifications.allLanguages.length).toEqual(3);
         expect(parameters.languageClassifications.allLanguages.map(function(m) { return m.name; })).toEqual(['English', 'French', 'German']);
+        expect(parameters.languageClassifications.selected).toEqual({});
+        expect(parameters.languageClassifications.badgeValue).toEqual(0);
+        expect(parameters.languageClassifications.checkSelected).toBeDefined();
+        
     });
     
     it('should test getters', function(){
