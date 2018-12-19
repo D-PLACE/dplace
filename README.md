@@ -7,6 +7,8 @@
 
 This repository contains a [Django](http://djangoproject.com) application for the D-PLACE Project. 
 
+**Please Note that this application has been superseded by [https://github.com/clld/dplace2](https://github.com/clld/dplace2)**
+
 Research that uses data from D-PLACE should cite both the original source(s) of
 the data and the paper by Kirby et al. in which D-PLACE was first presented
 (e.g., research using cultural data from the Binford Hunter-Gatherer dataset:
